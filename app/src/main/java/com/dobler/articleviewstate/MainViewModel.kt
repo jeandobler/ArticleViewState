@@ -21,4 +21,21 @@ class MainViewModel(private val repository: MovieRepository) : ViewModel() {
             }
         }
     }
+
+    private val responseError = MutableLiveData<String>()
+    val error = responseError
+
+    fun loadMovies2() {
+        viewModelScope.launch {
+            try {
+                val response = repository.getPage()
+                response.let {
+                    movieResult.postValue(it)
+                }
+            } catch (e: Exception) {
+                responseError.postValue("Error")
+            }
+        }
+    }
+
 }
