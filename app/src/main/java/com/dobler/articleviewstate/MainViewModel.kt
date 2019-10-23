@@ -3,17 +3,15 @@ package com.dobler.articleviewstate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val repository: MovieRepository) : ViewModel() {
 
-    private val repository = MovieRepository()
     private val movieResult = MutableLiveData<List<Movie>>()
     val movies = movieResult
 
-    private fun loadMovies1() {
-        viewModelScope.launch(Dispatchers.IO) {
+    fun loadMovies1() {
+        viewModelScope.launch {
             try {
                 val response = repository.getPage()
                 response.let {

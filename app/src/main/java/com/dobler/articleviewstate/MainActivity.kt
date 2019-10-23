@@ -2,6 +2,7 @@ package com.dobler.articleviewstate
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 
 
@@ -12,17 +13,19 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
+        setContentView(R.layout.activity_main)
 
-        viewModel.loadMovies()
+        viewModel.loadMovies1()
 
         viewModel.movies
             .observe(this, Observer {
-                binding.tvNoRepositories.visibility = View.GONE
-                adapter.submitList(it.response)
-                hideLoading()
+                updateMovieList(it)
             })
 
 
-        setContentView(R.layout.activity_main)
+    }
+
+    fun updateMovieList(movies: List<Movie>) {
+
     }
 }
