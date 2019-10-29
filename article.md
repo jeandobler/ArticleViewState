@@ -13,8 +13,8 @@ Vamos pegar um exemplo basico de uma chamada simples de uma API de filmes.
 
 `ViewModel`
 
-private val movieResult = MutableLiveData<List<Movie>>()
-val movies = movieResult
+    private val movieResult = MutableLiveData<List<Movie>>()
+    val movies = movieResult
 
     fun loadMovies1() {
         viewModelScope.launch {
@@ -31,7 +31,7 @@ val movies = movieResult
 
 `MainActivity`
 
-   viewModel.loadMovies1()
+    viewModel.loadMovies1()
     showLoading() // Iniciamos o load aqui
 
     viewModel.movies
@@ -94,6 +94,7 @@ em nosso caso como estamos na tela de Movie vamos criar a MovieViewState(sim cri
 
 
 `MovieViewState`
+
     sealed class MovieViewState
     class Movies(val result: Movie) : MovieViewState()
     class LongToast (val message: String): MovieViewState()
@@ -160,11 +161,11 @@ simples sem muitas mudanças na View também pode criar uma SealedClass generica
 
 `NetworkViewState`
 
-    sealed class ResponseState<T>
+    sealed class NetworkViewState<T>
 
-    class Success<T>(val data: T) : ResponseState<T>()
-    class Error<T>(val message: String) : ResponseState<T>()
-    class Loading<T> : ResponseState<T>()
+    class Success<T>(val data: T) : NetworkViewState<T>()
+    class Error<T>(val message: String) : NetworkViewState<T>()
+    class Loading<T> : NetworkViewState<T>()
 
 
 

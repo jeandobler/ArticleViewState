@@ -1,9 +1,11 @@
-package com.dobler.articleviewstate
+package com.dobler.articleviewstate.simpleproblem
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.dobler.articleviewstate.Movie
+import com.dobler.articleviewstate.R
 
 
 class MainActivity : AppCompatActivity() {
@@ -12,36 +14,20 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-
         setContentView(R.layout.activity_main)
+        
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        setupMovies()
     }
 
-    fun setupMovies1() {
-        viewModel.loadMovies1()
-        showLoading() // Iniciamos o load aqui
+    fun setupMovies() {
+        viewModel.loadMovies()
+        showLoading()
 
         viewModel.movies
             .observe(this, Observer {
                 updateMovieList(it)
-                hideLoading() // Remover o Load
-            })
-    }
-
-
-    fun setupMovies2() {
-        viewModel.loadMovies2()
-
-        viewModel.movies
-            .observe(this, Observer {
-                updateMovieList(it)
-                hideErrorMessage()
-            })
-
-        viewModel.error
-            .observe(this, Observer {
-                showErrorMessage(it)
+                hideLoading()
             })
     }
 
@@ -50,5 +36,4 @@ class MainActivity : AppCompatActivity() {
     fun showLoading() {}
     fun showErrorMessage(error: String) {}
     fun hideErrorMessage() {}
-
 }
