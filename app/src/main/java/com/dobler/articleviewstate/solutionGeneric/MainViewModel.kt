@@ -1,4 +1,4 @@
-package com.dobler.articleviewstate.complexproblem
+package com.dobler.articleviewstate.solutionGeneric
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,22 +11,19 @@ import kotlinx.coroutines.launch
 class MainViewModel : ViewModel() {
     var repository: MovieRepository = MovieRepository()
 
-    private val movieResult = MutableLiveData<List<Movie>>()
-    val movies: LiveData<List<Movie>> = movieResult
-
-    private val responseError = MutableLiveData<String>()
-    val error: LiveData<String> = responseError
-
+    private val movieState = MutableLiveData<NetworkViewState<List<Movie>>>()
+    val movieViewState: LiveData<NetworkViewState<List<Movie>>> = movieState
 
     fun loadMovies() {
+        movieState.value = Loading()
         viewModelScope.launch {
             try {
                 val response = repository.getPage()
                 response.let {
-                    movieResult.postValue(it)
+                    movieState.value = Success(it)
                 }
             } catch (e: Exception) {
-                responseError.postValue("Error")
+                movieState.postValue(Error(e.message.toString()))
             }
         }
     }

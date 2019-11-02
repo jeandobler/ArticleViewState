@@ -19,6 +19,7 @@
         </activity>
         <activity android:name=".complexproblem.MainActivity" />
         <activity android:name=".solution.MainActivity" />
+        <activity android:name=".solutionGeneric.MainActivity" />
     </application>
 
 </manifest>

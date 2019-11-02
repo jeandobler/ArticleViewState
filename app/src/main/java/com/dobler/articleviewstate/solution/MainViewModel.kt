@@ -7,7 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.dobler.articleviewstate.MovieRepository
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: MovieRepository) : ViewModel() {
+class MainViewModel : ViewModel() {
+    var repository: MovieRepository = MovieRepository()
 
     private val movieState = MutableLiveData<MovieViewState>()
     val movieViewState: LiveData<MovieViewState> = movieState
