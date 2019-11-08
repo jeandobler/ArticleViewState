@@ -1,11 +1,13 @@
 package com.dobler.articleviewstate.solution
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.dobler.articleviewstate.Movie
 import com.dobler.articleviewstate.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,11 +48,25 @@ class MainActivity : AppCompatActivity() {
             })
     }
 
-    private fun updateMovieList(movies: List<Movie>) {}
-    private fun hideLoading() {}
-    private fun showLoading() {}
-    private fun showErrorMessage(error: String) {}
-    private fun showEmptyMessage() {}
-    private fun hideErrorMessage() {}
+    private fun updateMovieList(movies: List<Movie>) {
+        tvList.visibility = View.VISIBLE
+    }
 
+    private fun hideLoading() {
+        pbLoading.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        pbLoading.visibility = View.VISIBLE
+    }
+
+    private fun showErrorMessage(error: String) {
+        tvError.visibility = View.VISIBLE
+    }
+
+    private fun hideErrorMessage() {
+        tvError.visibility = View.GONE
+    }
+
+    private fun showEmptyMessage() {}
 }

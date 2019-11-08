@@ -11,15 +11,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".simpleproblem.MainActivity">
+        <activity android:name=".solution.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".complexproblem.MainActivity" />
-        <activity android:name=".solution.MainActivity" />
         <activity android:name=".solutionGeneric.MainActivity" />
+        <activity android:name=".simpleproblem.MainActivity" />
     </application>
 
 </manifest>

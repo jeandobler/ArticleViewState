@@ -14,21 +14,19 @@ class MainViewModel : ViewModel() {
     val movieViewState: LiveData<MovieViewState> = movieState
 
     fun loadMovies() {
-
         movieState.value = ShowLoading
-
         viewModelScope.launch {
             try {
                 val response = repository.getPage()
                 response.let {
                     if (it.isEmpty()) {
-                        movieState.postValue(EmptyResults)
+                        movieState.value = EmptyResults
                     } else {
-                        movieState.postValue(Movies(it))
+                        movieState.value = Movies(it)
                     }
                 }
             } catch (e: Exception) {
-                movieState.postValue(GenericError(e.message.toString()))
+                movieState.value = GenericError(e.message.toString())
             }
         }
     }
